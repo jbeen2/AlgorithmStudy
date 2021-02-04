@@ -1,5 +1,3 @@
-# Time Limit Exceed...
-
 # !/bin/python3
 
 import math
@@ -18,7 +16,27 @@ import sys
 #  2. INTEGER_ARRAY player
 #
 
+
+# ranked는 오름차순, player는 내림차순 = 맨 뒤에서부터 비교해서, 바로 append
 def climbingLeaderboard(ranked, player):
+    queue = sorted(set(ranked), reverse=True)
+    idx = len(queue) - 1
+
+    answer = []
+
+    for p in player :
+        while queue[idx] <= p and idx >= 0 :
+            idx -= 1
+        if idx < 0 :
+            answer.append(1)
+            continue
+        answer.append(idx+2)
+
+    return answer
+
+
+# Time Limit Exceed...
+def climbingLeaderboard2(ranked, player):
     # Write your code here
     def dense_ranking(ranked, p=False, rerank=False):
         if rerank:
