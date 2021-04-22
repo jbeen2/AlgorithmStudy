@@ -1,22 +1,33 @@
-# 틀렸습니다
+# -*- coding: utf-8 -*-
+# 1. 편의점과 도착지 좌표를 d에 저장
+# 2. d안의 좌표를 하나씩 불러오면서 현재 위치와의 맨해튼 거리와 맥주양을 비교하여 이동가능한지 검사
+# 3. bfs로 이동하면서 목표에 도착하면 happy 불가능하면 sad 출력
+
+from collections import deque
+def bfs(x,y):
+    queue, current = deque(), []
+    queue.append([x,y])
+    current.append([x,y])
+
+    while queue:
+        i, j = queue.popleft()
+        if i == x1 and j == y1 :
+            return "happy"
+
+        for nx,ny in loc :
+            if [nx,ny] not in current :
+                dist = abs(nx - i) + abs(ny - j)
+                if dist <= 1000 :
+                    queue.append([nx,ny])
+                    current.append([nx, ny])
+    return "sad"
+
 T = int(input())
 for _ in range(T) :
     n = int(input())
-    lst = [list(map(int, input().split())) for _ in range(n+2)]
-    distlst = []
+    x0, y0 = map(int, input().split())  # 상근이네 집
+    loc = [list(map(int, input().split())) for _ in range(n)]  # 편의점 n
+    x1, y1 = map(int, input().split())  # 페스티벌
+    loc.append([x1,y1])
 
-    def dfs(lst) :
-        queue = [lst[0], lst[1]]
-
-        while len(lst) > 2 :
-            dist = abs(queue[1][0] - queue[0][0]) + abs(queue[1][1] - queue[0][1])
-            distlst.append(dist)
-
-            lst.pop(0)
-            dfs(lst)
-
-    dfs(lst)
-
-    dist = [d > 1000 for d in distlst]
-    print("happy" if dist == ([False] * len(dist)) else "sad")
-
+    print(bfs(x0,y0))
