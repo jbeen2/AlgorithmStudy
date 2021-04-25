@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-# 틀렸습니다 ~ ㅎㅎ ~
-
 import sys
 sys.setrecursionlimit(10**6)
 
@@ -11,6 +8,13 @@ def dfs(v, G, visited, result) :
             result.append(node)
             dfs(node, G, visited, result)
     result.append(v)
+
+def reverse_dfs(v, G, visited, result) :
+    visited[v] = True
+    result.append(v)
+    for node in G[v] :
+        if not visited[node] :
+            reverse_dfs(node, G, visited, result)
 
 V, E = map(int, input().split())
 adj, adj_T = [[] for _ in range(V+1)], [[] for _ in range(V+1)]
@@ -29,16 +33,16 @@ for k in range(1, V+1) :
 while stack :
     tmp = []
     node = stack.pop()
-
     if not visited2[node] :
-        dfs(node, adj_T, visited2, tmp)
-        scc.append(tmp)
+        reverse_dfs(node, adj_T, visited2, tmp)
+        scc.append(sorted(tmp))
 
 print(len(scc))
-scc = [sorted(s) for s in scc]
 for s in sorted(scc) :
-    print(*list(set(s)), -1)
+    print(*s, -1)
 
+
+# -*- coding: utf-8 -*-
 # Memory Exceed...... ^_^ 인접 행렬로 풀어서 그런 것 같음
 
 # def dfs(v, G, visited, result) :
