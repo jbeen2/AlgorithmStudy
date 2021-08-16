@@ -1,25 +1,32 @@
-# K보다 큰 W가 입력으로 들어올 때
 N, K = map(int, input().split())
-bag = sorted([tuple(map(int, input().split())) for _ in range(N)], key=lambda x : (-x[1], x[0]))
-d1, d2 = [0]*(N+1), [0]*(N+1) # w, v
+bag = [[0,0]] + sorted([list(map(int, input().split())) for _ in range(N)]) # key=lambda x : (-x[1], x[0]))
 
-print(bag)
+'''
+knapsack[i][j] = max(현재 물건 가치 + knapsack[이전 물건][현재 가방 무게 - 현재 물건 무게], knapsack[이전 물건][현재 가방 무게])
+knapsack[i][j] = max(value + knapsack[i - 1][j - weight], knapsack[i - 1][j])
+'''
 
-for i in range(len(bag)) :
-    print("i", i)
-    if K >= bag[i][0] :
-        d1[i] += bag[i][0] ; d2[i] += bag[i][1]
-        print("w", d1);
-        print("v", d2)
-        for j in range(i+1, N) :
-            if K-d1[i] >= bag[j][0] :
-                d1[i] += bag[j][0] ; d2[i] += bag[j][1]
-                print("w", d1) ; print("v", d2)
+knapsack = [[0]*(K+1) for _ in range(N+1)]
+for i in range(1,N+1) :
+    for j in range(1,K+1) :
+        w = bag[i][0] ; v = bag[i][1]
+        if j < w :
+            knapsack[i][j] = knapsack[i-1][j]
+        else :
+            knapsack[i][j] = max(v+knapsack[i-1][j-w], knapsack[i-1][j])
+print(knapsack[N][K])
 
 
-print("*")
-print(d1) ; print(d2)
-print("* answer : " , max(d2))
+
+# 느낌은 비슷한데 ㅠㅠ 조금만 더 생각하면 좋았을 듯
+# d1, d2 = [0]*100001, [0]*100001 # w, v
+# for i in range(len(bag)) :
+#     if K >= bag[i][0] : # K보다 큰 W가 입력으로 들어올 때
+#         d1[i] += bag[i][0] ; d2[i] += bag[i][1]
+#         for j in range(i+1, N) :
+#             if K-d1[i] >= bag[j][0] :
+#                 d1[i] += bag[j][0] ; d2[i] += bag[j][1]
+# print(max(d2))
 
 
 '''
