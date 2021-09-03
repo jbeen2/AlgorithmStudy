@@ -1,5 +1,10 @@
 # 알고리즘 출석도장 찍기 👀 
 
+### 2021.08
+
+<img width="1179" alt="스크린샷 2021-09-03 오후 2 07 37" src="https://user-images.githubusercontent.com/43749571/131953483-803d1bfc-788a-4a0c-a1e5-780f4f36063a.png">
+<br> 
+
 ### 2021.05 
 
 <img width="1142" alt="스크린샷 2021-06-07 오후 2 36 09" src="https://user-images.githubusercontent.com/43749571/120965154-6b5e4600-c79f-11eb-8031-302155d17db4.png">
