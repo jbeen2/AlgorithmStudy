@@ -1,3 +1,4 @@
+# Weekly Challenge 2
 def alphabet(score) :
     if score >= 90 : return "A"
     elif 80 <= score < 90 : return "B"

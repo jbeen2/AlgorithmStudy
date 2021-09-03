@@ -1,3 +1,4 @@
+# Weekly Challenge 1
 def solution(price, money, count):
     answer = sum([i*price for i in range(count+1)]) - money
     if answer >= 0 : return answer
